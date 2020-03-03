@@ -1,0 +1,5 @@
+<ul>
+    <ng-container  *ngFor="let persona of personas"> 
+      <li *ngIf="persona.edad>=18">{{persona.nombre}} {{persona.apellido}} es mayor de edad</li>
+  </ng-container>
+  </ul>
