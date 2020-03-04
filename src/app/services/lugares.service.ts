@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-
 import { AngularFireDatabase } from '@angular/fire/database';
+
 
 @Injectable() //Se lo utiliza para poder inyectar el servcio en los modulos. 
 export class lugaresService{
@@ -13,8 +13,12 @@ export class lugaresService{
         {id:6,plan:'pago', cercania:1 , distancia: 11, active:true,nombre:'floreria F'},
         {id:7,plan:'gratuito', cercania:1 , distancia: 19, active:true,nombre:'floreria G'},
       ];
+
+        title = 'Angular8Firebase';
+       description = 'Angular-Fire-Demo';
+
       constructor(private afDB:AngularFireDatabase){
-        
+         
       }
       public getLugares(){
           return this.lugares
@@ -27,7 +31,7 @@ export class lugaresService{
 
       public guardarLugar(lugar){
         console.log(lugar)
-        this.afDB.database.ref('lugares/1').set(lugar);
+        this.afDB.database.ref('lugares/'+ lugar.id).set(lugar);
       }
 
 }

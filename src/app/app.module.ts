@@ -13,11 +13,12 @@ import { AgmCoreModule } from '@agm/core';
 import { ResaltarDirective } from './directives/resaltar.directive';
 import { contactoComponent } from './contacto/contacto.component';
 import { lugaresService } from './services/lugares.service';
+import { crearLugarComponent } from './crearLugar/crearLugar.component';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { crearLugarComponent } from './crearLugar/crearLugar.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
 
 
 
@@ -31,17 +32,6 @@ const appRoutes: Routes =[
   {path:'contacto', component: contactoComponent},
   {path:'crear', component: crearLugarComponent},
 ];
-
-export const firebaseConfig = {
-  apiKey: "AIzaSyAaT65KvMsv7FzeG0S3c-x3988srZlVnFg",
-  authDomain: "joseproyecto1.firebaseapp.com",
-  databaseURL: "https://joseproyecto1.firebaseio.com",
-  //projectId: "joseproyecto1",
-  storageBucket: "joseproyecto1.appspot.com",
-  messagingSenderId: "527980418682",
-  //appId: "1:527980418682:web:82435d505870d52cb28dc3",
-  //measurementId: "G-7PQ6MWZHQW"
-};
 
 
 @NgModule({
@@ -65,11 +55,8 @@ export const firebaseConfig = {
     //Importamos la ruta del modulo.
     RouterModule.forRoot(appRoutes),
 
-
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, // para database
   ],
   providers: [lugaresService], //Para exportar el servicio en el modulo. 
   bootstrap: [AppComponent]
