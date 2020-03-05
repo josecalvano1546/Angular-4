@@ -1,28 +1,26 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from '@angular/fire/database';
+import {HttpClient} from '@angular/common/http'
 
 
 @Injectable() //Se lo utiliza para poder inyectar el servcio en los modulos. 
 export class lugaresService{
-    lugares=[
-        {id:1,plan:'pago', cercania:1 , distancia: 10, active:false,nombre:'floreria A'},
-        {id:2,plan:'gratuito', cercania:2 , distancia: 13, active:true,nombre:'floreria B'},
-        {id:3,plan:'gratuito', cercania:3 , distancia: 20, active:true,nombre:'floreria C'},
-        {id:4,plan:'pago', cercania:1 , distancia: 10, active:true,nombre:'floreria D'},
-        {id:5,plan:'gratuito', cercania:3 , distancia: 5, active:false,nombre:'floreria E'},
-        {id:6,plan:'pago', cercania:1 , distancia: 11, active:true,nombre:'floreria F'},
-        {id:7,plan:'gratuito', cercania:1 , distancia: 19, active:true,nombre:'floreria G'},
-      ];
+    lugares:any[]=[];
 
         title = 'Angular8Firebase';
        description = 'Angular-Fire-Demo';
 
-      constructor(private afDB:AngularFireDatabase){
+      constructor(private afDB:AngularFireDatabase, private http:HttpClient){
          
       }
-      public getLugares(){
-          return this.lugares
+   
+      getAllPersons(){
+        return this.http.get('https://swapi.co/api/people')
       }
+      getperson(id:string){
+        return this.http.get(`https://swapi.co/api/${id}`)
+      }
+
       public buscarLugar(id){
         return this.lugares.filter((lugar)=>{
           return lugar.id == id
@@ -31,7 +29,7 @@ export class lugaresService{
 
       public guardarLugar(lugar){
         console.log(lugar)
-        this.afDB.database.ref('lugares/'+ lugar.id).set(lugar);
+        this.afDB.database.ref('lugares'+ lugar.id).set(lugar);
       }
 
 }

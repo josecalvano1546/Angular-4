@@ -19,8 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
-
-
+import {HttpClientModule} from '@angular/common/http';
 
 //Crear una ruta
 const appRoutes: Routes =[
@@ -46,6 +45,7 @@ const appRoutes: Routes =[
   ],
   imports: [
     FormsModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     //Mapa
@@ -57,6 +57,8 @@ const appRoutes: Routes =[
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // para database
+
+    
   ],
   providers: [lugaresService], //Para exportar el servicio en el modulo. 
   bootstrap: [AppComponent]

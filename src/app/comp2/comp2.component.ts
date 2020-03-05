@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { lugaresService } from '../services/lugares.service';
 
+
 @Component({
   selector: 'app-comp2',
   templateUrl: './comp2.component.html'
@@ -9,9 +10,19 @@ import { lugaresService } from '../services/lugares.service';
 
 
 export class comp2Component {
-  lugares=null;
+  lugares:any[]=[]; 
   constructor(private lugaresService:lugaresService){
-    this.lugares = lugaresService.getLugares();
+    
   }
-
+ ngOnInit(){
+  this.fetchproduct();
+ }
+  fetchproduct(){
+    this.lugaresService.getAllPersons()
+    .subscribe(lugares=>{
+      this.lugares = lugares['results'];
+        console.log(lugares);
+      
+    } )
+  }
 }
