@@ -1,17 +1,18 @@
-<a class="btn btn-primary" routerLink="../crear">Crear Nuevo Negocio</a>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-          <h2>Lugares</h2>
-          <ul class="list-group">
-            <ng-container  *ngFor="let lugar of lugares"> 
-             <a routerLink="../detalle/{{lugar.id}}"> <li  class="list-group-item" >{{lugar.name}}</li>  </a> 
-          </ng-container>
-          </ul>
+        <div class="col-md-8 alineacion" >
+          <h2>Lista de personas</h2>
+          <div *ngIf="lugares">
+            <ul class="list-group">
+              <ng-container  *ngFor="let lugar of lugares"> 
+               <a routerLink="../detalle/{{lugar.id}}"> <li  class="list-group-item" >{{lugar.name}}</li>  </a> 
+            </ng-container>
+            </ul>
+          </div>
+          
         </div>
-        <div class="col-md-4">
-          <h2>Descripcion</h2>
-        </div>
+       
     </div>
   
   </div>

@@ -1,19 +1,22 @@
-<a routerLink="/comp2">Lugares</a> / {{lugar.nombre}}
-<div class="container">
-    <div class="card border-secondary mb-3">
-        <div class="card-header">
-            <h1>{{lugar.name}}</h1>
-        </div>
-        <div class="card-title">
-            <small>{{lugar.distancia}} KM</small>
-            <br />
-            <p>
-                {{lugar.descripcion}}
-            </p>
-            <b>suscripcion: {{lugar.plan}}</b>
-        </div>
-            
-        
-    </div>
+<div class="container "> 
+  <div *ngIf="lugar2"> 
+    <div>
+      <div *ngIf="photo"> 
+    
+        <div class="card" style="width: 18rem;">
+            <img src={{photo.url}} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Nombre:  {{lugar2.name}}</h5>
+              <br/>
+              <p class="card-text"><strong>Nombre de Usuario:</strong> {{lugar2.username}} </p>
+              <p class="card-text"><strong>Correo:</strong> {{lugar2.email}} </p>
+              <p class="card-text"><strong>Ciudad:</strong> {{lugar2.address.street}} </p>
+              <p class="card-text"><strong>Telefono:</strong>   {{lugar2.phone}}</p>
+              <p class="card-text"><strong>Sitio Web:</strong>  {{lugar2.website}}</p>
+              
+            </div>
+          </div>
+      </div>
+  </div>
 
 </div>

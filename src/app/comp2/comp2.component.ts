@@ -10,7 +10,8 @@ import { lugaresService } from '../services/lugares.service';
 
 
 export class comp2Component {
-  lugares:any[]=[]; 
+  lugares=null; 
+
   constructor(private lugaresService:lugaresService){
     
   }
@@ -20,9 +21,8 @@ export class comp2Component {
   fetchproduct(){
     this.lugaresService.getAllPersons()
     .subscribe(lugares=>{
-      this.lugares = lugares['results'];
-        console.log(lugares);
-      
+      this.lugares = lugares;
+        
     } )
   }
 }
