@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from '@angular/fire/database';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient} from '@angular/common/http';
+import {authenticate} from '../model/authenticate.model';
 
 
 
@@ -8,8 +9,8 @@ import {HttpClient} from '@angular/common/http'
 export class lugaresService{
 
 
-        title = 'Angular8Firebase';
-       description = 'Angular-Fire-Demo';
+      title = 'Angular8Firebase';
+      description = 'Angular-Fire-Demo';
 
       constructor(private afDB:AngularFireDatabase, private http:HttpClient){
          
@@ -25,7 +26,15 @@ export class lugaresService{
         return this.http.get(`https://jsonplaceholder.typicode.com/photos/${id}/`)
       }
 
+      generarAuten(auten:authenticate){
+        return this.http.post("http://10.13.99.200:9209/bantotal/servlet/com.dlya.bantotal.odwsbt_AWSBTAuthenticate?Execute", auten, {
+          headers: ({
+              'Content-Encoding': 'gzip',
+               'Content-Type':  'application/json;charset=utf-8',
 
+             })
+        }); 
+      }
      
 
       public guardarLugar(lugar){

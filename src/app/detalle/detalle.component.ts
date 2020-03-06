@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { lugaresService } from '../services/lugares.service';
-import {persona} from '../model/persona.model';  
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-detalle',
