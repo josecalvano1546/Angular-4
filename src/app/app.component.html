@@ -15,6 +15,7 @@
 
   </div>
 </nav>
+
  
 
 
@@ -30,10 +31,10 @@
    <br/>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In" (click)=" crearAuten()" >
+    <form >
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]='user.User'  >
+      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" [(ngModel)]='user.Password'>
+      <input type="submit" class="fadeIn fourth" value="Log In" (click)= "crearAuten()">
     </form>
 
     <!-- Remind Passowrd -->
@@ -45,9 +46,16 @@
 </div>
 
 
+<div>
+  <h1>Token: {{token.data.authToken}}</h1>
+</div>
 
+<h3>Luego de generar toquen:</h3>
+<input type="submit" class="fadeIn fourth" value="Obtener datos" (click)= "obtenerNombre()">
 
-
+<div *ngIf="cliente">
+  <p>Nombre: {{cliente.data.Name}}</p>
+</div>
 
 
 

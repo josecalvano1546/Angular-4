@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { authenticate } from './model/authenticate.model';
+
 import { lugaresService} from './services/lugares.service';
+
+import {tokenModel} from './model/token.model'
+import { loginModel } from './model/login.model';
+import {FormControl} from '@angular/forms'
+import { Persona } from './model/persona.model';
 
 
 @Component({
@@ -11,31 +16,42 @@ import { lugaresService} from './services/lugares.service';
 })
 export class AppComponent {
   title = 'angular-proyect';
-  constructor(private lugaresService:lugaresService){
+  token:tokenModel;
 
+  cliente:Persona;
+  usuarioField: FormControl;
+
+  public user={
+    User:'',
+    Password:'',
   }
-  
 
-  lat:number= -27.4692083;
-  lng:number= -58.8328236;
+  
+  constructor(private lugaresService:lugaresService, 
+    private persona:lugaresService,
+    ){
+    this.usuarioField = new FormControl();
+    this.usuarioField.valueChanges
+    .subscribe(
+      usuario => { console.log(usuario)})
+  }
+
+ 
   crearAuten(){
-    const newAuten: authenticate = {
-      Btinreq: {
-        Device: "WEB",
-        Usuario: "BTMOVTST",
-        Requerimiento: "20",
-        Canal: "BTMOBILE",
-        Token: ""
-      },
-      UserId: "BTMOVTST",
-      UserPassword: "*CTeS3017*"
-    }
-    this.lugaresService.generarAuten(newAuten)
+    this.lugaresService.generarAuten()
     .subscribe(tok=>{
       console.log('aca bro');
-      
-      console.log(tok)
+      console.log(tok);
+       this.token = tok;
     })
   }
+
+  obtenerNombre(){
+    this.persona.generarPersona(this.user, this.token.data.authToken)
+    .subscribe(persona=>{
+       this.cliente = persona;
+    })
+  }
+  
   
 }

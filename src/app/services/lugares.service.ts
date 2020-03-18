@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from '@angular/fire/database';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,HttpHeaders, HttpResponse} from '@angular/common/http';
 import {authenticate} from '../model/authenticate.model';
+import { tokenModel } from '../model/token.model';
+import { Persona } from '../model/persona.model';
 
 
 
@@ -9,13 +11,14 @@ import {authenticate} from '../model/authenticate.model';
 export class lugaresService{
 
 
-      title = 'Angular8Firebase';
+      title = 'Angular8Firebase'; 
       description = 'Angular-Fire-Demo';
 
       constructor(private afDB:AngularFireDatabase, private http:HttpClient){
          
       }
-   
+     
+
       getAllPersons(){
         return this.http.get('https://jsonplaceholder.typicode.com/users')
       }
@@ -26,20 +29,31 @@ export class lugaresService{
         return this.http.get(`https://jsonplaceholder.typicode.com/photos/${id}/`)
       }
 
-      generarAuten(auten:authenticate){
-        return this.http.post("http://10.13.99.200:9209/bantotal/servlet/com.dlya.bantotal.odwsbt_AWSBTAuthenticate?Execute", auten, {
-          headers: ({
-              'Content-Encoding': 'gzip',
-               'Content-Type':  'application/json;charset=utf-8',
-
-             })
-        }); 
+      generarAuten(){
+        return this.http.get<tokenModel>("http://10.12.21.38:80/api/auth_api"); 
       }
+
+      generarPersona(persona, tokenPersona){
+
+        return this.http.post<Persona>("http://10.12.21.38:80/api/login_user_confirm", persona, {
+           headers: {
+              'Content-Type': 'application/json',
+              'authapi': tokenPersona,
+              'channel' : 'WB'
+
+          }
+          }
+        
+        );  
+      }
+
+      // auten, {
+      //   headers: {
+      //     ' Content-Type': 'application/json',
+      //    }
+      // }
      
 
-      public guardarLugar(lugar){
-        console.log(lugar)
-        this.afDB.database.ref('lugares'+ lugar.id).set(lugar);
-      }
+      
 
 }
